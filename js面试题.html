@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+  //一些js代码题
+
+  //用友
+  //本题考查声明提升
+  //执行这段代码，输出什么结果--
+  function test() {
+    console.log(a); //undefined
+    console.log(foo()); //2
+    var a = 1;
+
+    function foo() {
+      return 2;
+    }
+  }
+  //分析：原因是，变量和函数的声明都被提前了（移到了函数的顶部），但变量不分配任何值。因此，在打印变量的时候，它在函数中存在（它被声明了），但它仍然是 undefined 。
+
+  /*********************************************************************************************/
+
+  //用友
+  //本题考查this的指向
+  //下面的代码会输出什么结果？给出你的答案--
+  var fullname = 'John';
+  var obj = {
+    fullname: 'Colin',
+    prop: {
+      fullname: 'Aurelio',
+      getFullname: function () {
+        return this.fullname;
+      }
+    }
+  };
+  console.log(obj.prop.getFullname()); //Aurelio
+  var test = obj.prop.getFullname;
+  console.log(test()); //John
+  test(); 
+  //分析：原因是，在一个函数中，this的行为，取决于JavaScript函数的调用方式和定义方式，而不仅仅是看它如何被定义的。
+//在第一个 console.log()调用中，getFullname() 被调用作为obj.prop对象的函数。所以，上下文指的是后者，函数返回该对象的fullname。与此相反，当getFullname()被分配到test变量时，上下文指的是全局对象（window）。这是因为test是被隐式设置为全局对象的属性。出于这个原因，该函数返回window的fullname，即定义在第一行的那个值。
+
+/*********************************************************************************************/
+
+var a=0,b=0;
+    function A(a){
+      A=function(b){alert(a+b++);}
+      alert(a++);
+    }
+    A(1);//alert(1)
+    A(2);//alert(4)
+
+/*********************************************************************************************/
+
+</script>
+
+</html>

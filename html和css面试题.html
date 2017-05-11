@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>html和css面试题</title>
+</head>
+<body>
+	
+	<script type="text/javascript">
+		//注：标题前面加！！！表示在实际面试中遭遇的题目；
+	
+		//！！！清除浮动的几种方式
+			//清除浮动本质上就是闭合浮动，就是把浮动的盒子圈到里面，让父盒子闭合出口和入口不让他们出来影响其他元素。
+		//1.额外标签法:
+			//是W3C推荐的做法是通过在浮动元素末尾添加一个空的标签例如 <div style=”clear:both”></div>，或则其他标签br等亦可。
+			//优点： 通俗易懂，书写方便
+			//缺点： 添加许多无意义的标签，结构化较差。 我只能说，w3c你推荐的方法我不接受，你不值得拥有。。。
+		//2.父级添加overflow属性方法:
+			//可以通过触发BFC的方式，可以实现清除浮动效果(BFC块级格式化上下文)。可以给父级添加： overflow为 hidden|auto|scroll 都可以实现。
+			//优点： 代码简洁
+			//缺点： 内容增多时候容易造成不会自动换行导致内容被隐藏掉，无法显示需要溢出的元素。
+		//3.使用after伪元素清除浮动:
+			//使用方法：
+ 			.clearfix:after {  content: "."; display: block; height: 0; clear: both; visibility: hidden;    
+ 			.clearfix {*zoom: 1;}   ie6、7 专有
+ 			//注意： content:"." 里面尽量跟一个小点，或者其他，尽量不要为空，否则在firefox 7.0前的版本会有生成空格。
+ 			//优点： 符合闭合浮动思想 结构语义化正确
+			//缺点： 由于IE6-7不支持:after，使用 zoom:1触发 hasLayout。
+		//4.使用before和after双伪元素清除浮动
+			//使用方法：
+			.clearfix:before,.clearfix:after{ 
+           content:".";
+           display:table;
+   		}
+			.clearfix:after{
+ 				clear:both;
+			}
+			.clearfix{*zoom:1;}
+			//优点： 代码更简洁
+			//缺点： 由于IE6-7不支持:after，使用 zoom:1触发 hasLayout。
+		//5.after伪元素空余字符法:
+			//content:"\200B";这个参数，Unicode字符里有一个“零宽度空格”，即 U+200B，代替原来的“.”，可以缩减代码量。而且不再使用visibility:hidden。
+			.clearfix:after {content:"\200B"; display:block; height:0; clear:both; }
+			.clearfix { *zoom:1; }.
+			//当然有些网站也用 content:"\0200" 的，都是空格的意思。
+ 		
+/***************************************************************************************/
+	</script>
+</body>
+</html>
